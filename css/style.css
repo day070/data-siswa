@@ -1,0 +1,32 @@
+.navcuy {
+  position: fixed;
+  width: 100%;
+  z-index: -9;
+}
+.sidebar {
+  position: fixed;
+}
+.cuycuy {
+  position: absolute;
+  bottom: 0;
+  height: 90%;
+  width: 84%;
+  right: 0;
+}
+
+.bgkk {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  color: rgb(49, 49, 49);
+}
+.bungkus-kar {
+  width: 100%;
+  height: 100vh;
+  padding: 50px;
+  display: flex;
+  justify-content: space-around;
+  position: absolute;
+  top: 20px;
+}
