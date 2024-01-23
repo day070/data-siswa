@@ -20,7 +20,6 @@ $data = mysqli_query($con, "SELECT * FROM tbl_siswa");
 <body>
     <nav class="navbar navbar-expand-lg bg-body-tertiary navcuy">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">Navbar</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                 aria-label="Toggle navigation">
@@ -130,7 +129,7 @@ $data = mysqli_query($con, "SELECT * FROM tbl_siswa");
                         ?>
                         <div class="mt-2">
                             <?php
-                            echo "<a class='btn btn-danger m-1' href='delete.php?nisn=$siswa[nisn]'>Hapus</a>";
+                            echo "<a class='btn btn-danger m-1' href='delete.php?nisn=$siswa[nisn]' onClick=\"return confirm('Yakin Ingin Hapus data');\">Hapus</a>";
                             echo "<a class='btn btn-warning' href='edit.php?nisn=$siswa[nisn]'> Edit</a>";
                             ?>
                         </div>

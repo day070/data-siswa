@@ -39,8 +39,7 @@ include("conection.php");
         $jurusan = $_POST['jurusan'];
         $alamat = $_POST['alamat'];
 
-        $queryTambah = mysqli_query($con, "INSE
-        RT INTO tbl_siswa(nama,jurusan,alamat)VALUES('$nama','$jurusan','$alamat')");
+        $queryTambah = mysqli_query($con, "INSERT INTO tbl_siswa(nama,jurusan,alamat)VALUES('$nama','$jurusan','$alamat')");
 
         if ($queryTambah) {
             ?>

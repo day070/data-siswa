@@ -34,7 +34,7 @@ require("conection.php");
             $username = $_POST['nama'];
             $password = $_POST['password'];
 
-            $query = mysqli_query($con, "SELECT * FROM tbl_user WHERE user='$username' AND pass='$password' ");
+            $query = mysqli_query($con, "SELECT * FROM tbl_user WHERE user='$username'");
             if (!$query) {
                 echo mysqli_error($con);
             } else {
