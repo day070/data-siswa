@@ -1,4 +1,5 @@
 <?php
+session_start();
 require("conection.php");
 ?>
 
@@ -16,15 +17,14 @@ require("conection.php");
         <table>
             <tr>
                 <td>Nama</td>
-                <td><input type="text" name="nama"></td>
+                <td><input type="text" name="nama" autocomplete="off"></td>
             </tr>
             <tr>
                 <td>Password</td>
-                <td><input type="password" name="password"></td>
+                <td><input type="password" name="password" autocomplete="off"></td>
             </tr>
             <tr>
                 <td>
-
                     <button type="submit" name="kirim">Kirim</button>
                 </td>
             </tr>
@@ -35,10 +35,24 @@ require("conection.php");
             $password = $_POST['password'];
 
             $query = mysqli_query($con, "SELECT * FROM tbl_user WHERE user='$username'");
-            if (!$query) {
-                echo mysqli_error($con);
+            $countdata = mysqli_num_rows($query);
+            $data = mysqli_fetch_array($query);
+
+            if ($countdata > 0) {
+                if (password_verify($password, $data['pass'])) {
+                    $_SESSION['username'] = $data['user'];
+                    $_SESSION['nama'] = $data['nama'];
+                    $_SESSION['login'] = true;
+                    header('location:index.php');
+                } else {
+                    ?>
+                    <div class="alert alert-danger" role="alert">Password Salah!</div>
+                    <?php
+                }
             } else {
-                header('location:index.php');
+                ?>
+                <div class="alert alert-danger" role="alert">Data yang kamu masukan Salah!</div>
+                <?php
             }
         }
         ?>

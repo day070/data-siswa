@@ -13,7 +13,7 @@ include("conection.php");
 
 <body>
     <button>Kembali</button>
-    <form action="" method="post">
+    <form action="" method="post" enctype="multipart/form-data">
         <table>
             <tr>
                 <td>Nama</td>
@@ -28,6 +28,10 @@ include("conection.php");
                 <td><input type="text" name="alamat" required></td>
             </tr>
             <tr>
+                <td>Foto</td>
+                <td><input type="file"></td>
+            </tr>
+            <tr>
                 <td colspan="2"><input type="submit" name="submit" value="Tambah"></td>
             </tr>
         </table>
@@ -38,6 +42,9 @@ include("conection.php");
         $nama = $_POST['nama'];
         $jurusan = $_POST['jurusan'];
         $alamat = $_POST['alamat'];
+
+        $target_dir = "upload/";
+        $target_file = $target_dir . basename($_FILES["file"]["name"]);
 
         $queryTambah = mysqli_query($con, "INSERT INTO tbl_siswa(nama,jurusan,alamat)VALUES('$nama','$jurusan','$alamat')");
 

@@ -1,5 +1,6 @@
 <?php
 require("conection.php");
+include('session.php');
 $data = mysqli_query($con, "SELECT * FROM tbl_siswa");
 ?>
 
@@ -18,6 +19,7 @@ $data = mysqli_query($con, "SELECT * FROM tbl_siswa");
 <link rel="stylesheet" href="css/style.css">
 
 <body>
+    <!-- Navbar Start -->
     <nav class="navbar navbar-expand-lg bg-body-tertiary navcuy">
         <div class="container-fluid">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -30,15 +32,27 @@ $data = mysqli_query($con, "SELECT * FROM tbl_siswa");
 
 
                 </ul>
-                <form class="d-flex" role="search">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
+                <!-- Seacrh Start -->
+                <form class="d-flex" role="search" method="post">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"
+                        name="keyword">
+                    <button class="btn btn-outline-success" type="submit" name="submit">Search</button>
                 </form>
+                <?php
+                if (isset($_POST['submit'])) {
+                    $nama = $_POST['keyword'];
+                    $data = mysqli_query($con, "SELECT * FROM tbl_siswa WHERE nama LIKE '%$nama%' ");
+
+                }
+                ?>
+                <!-- Seacrh End -->
             </div>
         </div>
 
     </nav>
+    <!-- Navbar End -->
 
+    <!-- Sidebar Start -->
     <div class="d-flex flex-column flex-shrink-0 p-3 bg-light sidebar" style="width: 240px;height:100vh;">
         <ul class="nav nav-pills flex-column mb-auto mt-5">
             <li>
@@ -96,16 +110,21 @@ $data = mysqli_query($con, "SELECT * FROM tbl_siswa");
                 <li>
                     <hr class="dropdown-divider">
                 </li>
-                <li><a class="dropdown-item" href="#">Sign out</a></li>
+                <li><a class="dropdown-item" href="logout.php">Sign out</a></li>
             </ul>
         </div>
     </div>
+    <!-- Sidebar End -->
+
+    <!-- Content Start -->
     <div class="cuycuy">
         <div class="bgkk">
             <h3>Data Siswa</h3>
         </div>
+        <!-- Bungkus Kartu Start -->
         <div class="bungkus-kar">
             <?php
+            // Mengulang data untuk ditampilkan dalam kartu sesuai db
             while ($siswa = mysqli_fetch_array($data)) {
 
                 ?>
@@ -128,16 +147,24 @@ $data = mysqli_query($con, "SELECT * FROM tbl_siswa");
                         <?php
                         ?>
                         <div class="mt-2">
+                            <!-- Mengirimkan id untuk hapus dan edit data Start -->
                             <?php
                             echo "<a class='btn btn-danger m-1' href='delete.php?nisn=$siswa[nisn]' onClick=\"return confirm('Yakin Ingin Hapus data');\">Hapus</a>";
                             echo "<a class='btn btn-warning' href='edit.php?nisn=$siswa[nisn]'> Edit</a>";
                             ?>
+                            <!-- Mengirimkan id untuk hapus dan edit data End -->
                         </div>
                     </div>
                 </div>
-            <?php } ?>
+
+            <?php }
+
+            ?>
         </div>
+
+        <!-- Bungkus Kartu End -->
     </div>
+    <!-- Content End -->
 
 
 
@@ -148,7 +175,5 @@ $data = mysqli_query($con, "SELECT * FROM tbl_siswa");
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
 </body>
-
-
 
 </html>
