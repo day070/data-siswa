@@ -1,7 +1,7 @@
 <?php
 require("conection.php");
 include('session.php');
-$data = mysqli_query($con, "SELECT * FROM tbl_siswa");
+$data = mysqli_query($con, "SELECT * FROM tbl_siswa ORDER BY nisn DESC");
 ?>
 
 
@@ -69,6 +69,7 @@ $data = mysqli_query($con, "SELECT * FROM tbl_siswa");
                         <use xlink:href="#speedometer2"></use>
                     </svg>
                     Dashboard
+
                 </a>
             </li>
             <li>
@@ -119,7 +120,9 @@ $data = mysqli_query($con, "SELECT * FROM tbl_siswa");
     <!-- Content Start -->
     <div class="cuycuy">
         <div class="bgkk">
-            <h3>Data Siswa</h3>
+            <h3>
+                Data Siswa
+            </h3>
         </div>
         <!-- Bungkus Kartu Start -->
         <div class="bungkus-kar">
@@ -130,7 +133,7 @@ $data = mysqli_query($con, "SELECT * FROM tbl_siswa");
                 ?>
 
                 <div class="card" style="width: 18rem;margin:20px;">
-                    <img src="aurel.jpg" class="card-img-top" style="height:250px;">
+                    <img src="upload/<?php echo $siswa['foto']; ?>" class="card-img-top" style="height:250px;">
                     <div class="card-body">
                         <h5 class="card-title">
                             <?php echo $siswa['nama'] ?>

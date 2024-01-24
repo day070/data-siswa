@@ -34,15 +34,16 @@ require("conection.php");
             $username = $_POST['nama'];
             $password = $_POST['password'];
 
-            $query = mysqli_query($con, "SELECT * FROM tbl_user WHERE user='$username'");
+            $query = mysqli_query($con, "SELECT * FROM tbl_user WHERE user='$username' AND pass = '$password'");
             $countdata = mysqli_num_rows($query);
             $data = mysqli_fetch_array($query);
 
             if ($countdata > 0) {
-                if (password_verify($password, $data['pass'])) {
+                if ($password == $data['pass']) {
                     $_SESSION['username'] = $data['user'];
                     $_SESSION['nama'] = $data['nama'];
                     $_SESSION['login'] = true;
+                    $_SESSION['pass'] = $data['pass'];
                     header('location:index.php');
                 } else {
                     ?>
